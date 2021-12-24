@@ -1,7 +1,7 @@
 <?php
 
-add_action('rest_api_init', 'register_routes');
 $namespace = 'v1';
+add_action('rest_api_init', 'register_routes');
 
 function register_routes()
 {
@@ -23,6 +23,10 @@ function test_callback()
     $data['status'] = 'OK';
     $data['message'] = 'You have a request for server';
     return $data;
+
+    // global $wpdb;
+    // $charset_collate = $wpdb->get_charset_collate();
+    // return $charset_collate;
 
     // return CUSTOM_API_BASE;
 }

@@ -15,10 +15,14 @@ define('CUSTOM_API_PATH', plugin_dir_path(__FILE__));
 define('CUSTOM_API_URI', plugin_dir_url(__FILE__));
 define('CUSTOM_API_FILE', __FILE__);
 
-/* Load Plugin Prefix Config
+/* Load API Prefix Config
 ******************************/
 require_once CUSTOM_API_PATH . 'api/prefix-config.php';
 
-/* Load Plugin API
+/* Load API Manager
 ******************************/
 require_once CUSTOM_API_PATH . 'api/api.php';
+
+/* Load Database Manager
+******************************/
+require_once CUSTOM_API_PATH . 'db/db.php';

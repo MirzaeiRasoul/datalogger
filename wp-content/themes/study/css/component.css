@@ -1,0 +1,14 @@
+.row {
+    display: flex;
+}
+
+.card {
+    padding: 5px;
+}
+
+.card-content {
+    background: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 1px 1px 5px #eee;
+}
