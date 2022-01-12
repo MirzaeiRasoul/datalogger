@@ -10,12 +10,7 @@ get_header(); ?>
     <div class="row">
         <div class="card flex-1">
             <div class="card-content">
-                <?php
-                while (have_posts()) {
-                    the_post();
-                    get_template_part('template-parts/content-page');
-                }
-                ?>
+                dfsdfsdf
             </div>
         </div>
     </div>

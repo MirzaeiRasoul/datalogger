@@ -1,12 +1,34 @@
 <?php
 
-get_header();
+get_header(); ?>
 
-while (have_posts()) {
-    the_post(); ?>
+<main class="main">
+    <div class="row">
+        <div class="card flex-1">
+            <div class="card-content">col1</div>
+        </div>
+        <div class="card flex-2">
+            <div class="card-content">col2</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card flex-1">
+            <div class="card-content">
+                <?php
+                $tractor_posts = new WP_Query(array(
+                    'post_type' => 'tractor'
+                ));
 
-    <h2><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h2>
+                while ($tractor_posts->have_posts()) {
+                    $tractor_posts->the_post();
+                    get_template_part('template-parts/content');
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+</main> <!-- .main -->
 
-<?php }
-
+<?php
 get_footer();
+get_sidebar();

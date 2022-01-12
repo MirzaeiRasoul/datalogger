@@ -1,12 +1,26 @@
 <?php
 
-get_header();
+/**
+ * The template for displaying posts
+ */
 
-while (have_posts()) {
-    the_post(); ?>
+get_header(); ?>
 
-    <h2><?php the_title() ?></h2>
+<main class="main">
+    <div class="row">
+        <div class="card flex-1">
+            <div class="card-content">
+                <?php
+                while (have_posts()) {
+                    the_post();
+                    get_template_part('template-parts/content-page');
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+</main> <!-- .main -->
 
-<?php }
-
+<?php
 get_footer();
+get_sidebar();

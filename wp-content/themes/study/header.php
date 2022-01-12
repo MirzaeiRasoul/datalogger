@@ -12,14 +12,14 @@
         <div class="content">
             <header class="header">
                 <div class="brand">
-                    <span class="site-logo">&#x1F4C8;</span>
+                    <span class="site-logo">&#128668;</span>
                     <a class="site-title" href="<?php echo get_site_url(); ?>">سامانه مانیتورینگ هوشمند</a>
                 </div>
                 <nav class="navbar">
                     <ul class="navbar-list">
-                        <li class="navbar-item"><a href="#">Startseite</a></li>
-                        <li class="navbar-item"><a href="#">Über</a></li>
-                        <li class="navbar-item"><a href="#">Kontakt</a></li>
+                        <li class="navbar-item"><a href="#"><?php esc_html_e('About', 'study'); ?></a></li>
+                        <li class="navbar-item"><a href="#">Hello</a></li>
+                        <li class="navbar-item"><a href="#">Welcome</a></li>
                     </ul>
                 </nav> <!-- .navbar -->
             </header> <!-- .header -->

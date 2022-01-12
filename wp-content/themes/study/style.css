@@ -1,7 +1,10 @@
+@charset "UTF-8";
+
 /*
 Theme Name: Study
 Author: Rasoul Mirzaei Zadeh
 Version: 1.0.0
+Text Domain: study
 */
 
 @font-face {
@@ -66,6 +69,7 @@ body {
 }
 
 a {
+    display: flex;
     color: #000a;
     text-decoration: none;
 }

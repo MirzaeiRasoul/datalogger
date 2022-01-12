@@ -1,6 +1,8 @@
 </div> <!-- .content -->
 <aside class="sidebar">
-    <section class="sidebar-logo">&#x1F3E1;</section>
+    <section class="sidebar-logo">
+        <a href="<?php echo get_site_url(); ?>">&#128668;</a>
+    </section>
     <section class="sidebar-item active">&#x26EA;</section>
     <section class="sidebar-item">&#x1F4C8;</section>
     <section class="sidebar-item">&#x23F1;</section>
