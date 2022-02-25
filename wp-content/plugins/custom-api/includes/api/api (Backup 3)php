@@ -1,0 +1,233 @@
+<?php
+
+$namespace = 'v1';
+add_action('rest_api_init', 'register_routes');
+
+function register_routes()
+{
+    global $namespace;
+
+    // Register API for get all tractors
+    register_rest_route($namespace, 'tractors', ['methods' => 'GET', 'callback' => 'get_all_tractors']);
+
+    // Register API for get a single tractor
+    register_rest_route($namespace, 'tractors/(?P<id>\d+)', ['methods' => 'GET', 'callback' => 'get_single_tractror_by_id']);
+
+
+    // Register API for select all sensors of a single tractor
+    register_rest_route($namespace, 'tractors/(?P<id>\d+)/sensors', ['methods' => 'GET', 'callback' => 'get_all_sensors_of_single_tractor_by_id']);
+
+    // Register API for create a new sensor of a single tractor
+    register_rest_route($namespace, 'tractors/(?P<id>\d+)/sensors', ['methods' => 'POST', 'callback' => 'create_new_sensor_of_single_tractor_by_id']);
+
+    // Register API for update a new sensor of a single tractor
+    register_rest_route($namespace, 'tractors/(?P<id>\d+)/sensors', ['methods' => 'PUT', 'callback' => 'update_single_sensor_of_single_tractor_by_id']);
+}
+
+function get_all_tractors()
+{
+    global $wpdb; // Global wordpress database class
+    $table_name = $wpdb->prefix . 'posts'; // wp_posts
+    $query = "
+        SELECT * FROM $table_name
+        WHERE post_type = 'tractor'
+        ORDER BY post_date DESC
+    ";
+    $tractors = $wpdb->get_results($query);
+
+    foreach ($tractors as $tractor) {
+        $data[] = array(
+            'id' => $tractor->ID,
+            'title' => $tractor->post_title,
+            'content' => $tractor->post_content,
+            'permalink' => get_the_permalink($tractor->ID),
+            'sensors' => array(
+                'sensor_1' => get_post_meta($tractor->ID, 'sensor_1', true),
+                'sensor_2' => get_post_meta($tractor->ID, 'sensor_2', true),
+            )
+        );
+    }
+
+    $response = array(
+        'success' => true,
+        'message' => '...',
+        'data' => $data
+    );
+    return $response;
+}
+
+function get_single_tractror_by_id($request)
+{
+    global $wpdb; // Global wordpress database class
+    $table_name = $wpdb->prefix . 'posts'; // wp_posts
+    $tractor_id = $request->get_param('id');;
+    $query = "
+        SELECT * FROM $table_name
+        WHERE ID = $tractor_id
+    ";
+    $tractor = $wpdb->get_results($query);
+
+    $data = array(
+        'id' => $tractor[0]->ID,
+        'title' => $tractor[0]->post_title,
+        'content' => $tractor[0]->post_content,
+        'excerpt' => $tractor[0]->post_excerpt,
+    );
+
+    $response = array(
+        'success' => true,
+        'message' => '...',
+        'data' => $data
+    );
+    return $response;
+}
+
+function get_all_sensors_of_single_tractor_by_id($request)
+{
+    global $wpdb; // Global wordpress database class
+    $table_name = $wpdb->prefix . 'sensors'; // wp_sensors
+    $post_id = $request->get_param('id');;
+    $query = "
+        SELECT * FROM $table_name
+        WHERE post_id = $post_id
+    ";
+    $sensors = $wpdb->get_results($query);
+
+    foreach ($sensors as $sensor) {
+        $data[] = array(
+            'id' => $sensor->sensor_id,
+            'name' => $sensor->sensor_name,
+            'persianName' => $sensor->sensor_persian_name,
+            'value' => $sensor->sensor_value,
+            'date' => $sensor->sensor_date,
+            'modified' => $sensor->sensor_modified
+        );
+    }
+
+    $response = array(
+        'success' => true,
+        'message' => '...',
+        'data' => $data
+    );
+    return $response;
+}
+
+function create_new_sensor_of_single_tractor_by_id($request)
+{
+    global $wpdb; // Global wordpress database class
+    $table_name = $wpdb->prefix . 'sensors'; // wp_sensors
+    $post_id = $request->get_param('id');;
+    $now = current_time('mysql');
+
+    // Normal method
+    // $query = $wpdb->prepare(
+    //     "INSERT INTO $table_name (post_id, sensor_name, sensor_persian_name, sensor_value, sensor_date, sensor_modified) VALUES ( %d, %s, %s, %s, %s, %s)",
+    //     $post_id,
+    //     'Sensor 2',
+    //     'سنسور شماره ۲',
+    //     'Off',
+    //     $now,
+    //     $now
+    // );
+    // $query_result = $wpdb->query($query);
+
+    $query_result = $wpdb->insert(
+        $table_name,
+        array(
+            'post_id'             => $post_id,
+            'sensor_name'         => 'Sensor 2',
+            'sensor_persian_name' => 'سنسور شماره 2',
+            'sensor_value'        => 'Off',
+            'sensor_date'         => $now,
+            'sensor_modified'     => $now,
+        )
+    );
+
+    $response = array();
+    if ($query_result) {
+        $response = array(
+            'success' => true,
+            'message' => 'New record created successfully.',
+            'data' => array(
+                'newRecordId' => $wpdb->insert_id
+            )
+        );
+    } else {
+        $response = array(
+            'success' => false,
+            'message' => 'Create new record is failed.',
+            'error' => array(
+                'code' => 'DB',
+                'detail' => $wpdb->last_error,
+                'solution' => 'Another sensor for this tractor with same name is already exists or ...'
+            )
+        );
+    }
+    return $response;
+}
+
+function update_single_sensor_of_single_tractor_by_id($request)
+{
+    global $wpdb; // Global wordpress database class
+    $table_name = $wpdb->prefix . 'sensors'; // wp_sensors
+    $post_id = $request->get_param('id');
+    $sensor_name = $request->get_param('sensor_name');
+    $sensor_value = $request->get_param('sensor_value');
+    $now = current_time('mysql');
+
+    $response = array();
+    if (isset($post_id, $sensor_name, $sensor_value)) {
+        // Normal method
+        // $query = $wpdb->prepare(
+        //     "UPDATE $table_name SET sensor_value = %s, sensor_modified = %s WHERE post_id = %d AND sensor_name = %s",
+        //     $sensor_value,
+        //     $now,
+        //     $post_id,
+        //     $sensor_name
+        // );
+        // $query_result = $wpdb->query($query);
+
+        $query_result = $wpdb->update(
+            $table_name,
+            array(
+                'sensor_value'        => $sensor_value,
+                'sensor_modified'     => $now,
+            ),
+            array(
+                'post_id'             => $post_id,
+                'sensor_name'         => $sensor_name
+            )
+        );
+
+        if ($query_result) {
+            $response = array(
+                'success' => true,
+                'message' => 'Record updated successfully.',
+                'data' => array(
+                    'numberOfUpdatedRecords' => $query_result
+                )
+            );
+        } else {
+            $response = array(
+                'success' => false,
+                'message' => 'Update record is failed.',
+                'error' => array(
+                    'code' => 'record_not_exists',
+                    'detail' => $query_result ? $wpdb->last_error : 'Record does not exist with id: ' . $post_id,
+                    'solution' => ''
+                )
+            );
+        }
+    } else {
+        $response = array(
+            'success' => false,
+            'message' => 'Required parameter(s) missing.',
+            'error' => array(
+                'code' => 'missing_param',
+                'detail' => 'This request need parameters: sensor_name and sensor_value',
+                'solution' => ''
+            )
+        );
+    }
+    return $response;
+}

@@ -35,3 +35,4 @@ require_once CUSTOM_API_PATH . 'includes/db/db.php';
 /* Register Post Type
 ******************************/
 require_once CUSTOM_API_PATH . 'includes/post-type/tractor-post-type.php';
+require_once CUSTOM_API_PATH . 'includes/post-type/tractor-meta-box.php';

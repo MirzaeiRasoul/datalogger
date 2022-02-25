@@ -3,9 +3,10 @@
 function create_tractor_post_type()
 {
     register_post_type('tractor', array(
+        'menu_icon'   => 'dashicons-car',
+        'public'      => true,
         'has_archive' => true, 
-        'public'    => true,
-        'labels'    => array(
+        'labels'      => array(
             'name'                  => __('Tractors', 'custom-api'),
             'singular_name'         => __('Tractor', 'custom-api'),
             'menu_name'             => __('Tractors', 'custom-api'),
@@ -19,7 +20,7 @@ function create_tractor_post_type()
             'not_found'             => __('No tractors found!', 'custom-api'),
             'not_found_in_trash'    => __('No tractors found in trash!', 'custom-api'),
         ),
-        'menu_icon' => 'dashicons-car',
+        'supports'    => array( 'title', 'editor', 'thumbnail', 'excerpt' )
     ));
 }
 

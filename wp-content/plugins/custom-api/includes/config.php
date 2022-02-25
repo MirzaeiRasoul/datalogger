@@ -10,3 +10,11 @@ function load_text_domain()
 }
 
 add_action('plugins_loaded', 'load_text_domain');
+
+
+function load_admin_styles()
+{
+    wp_enqueue_style('admin_style', CUSTOM_API_URI . 'admin/assets/css/admin.css');
+}
+
+add_action('admin_enqueue_scripts', 'load_admin_styles');
