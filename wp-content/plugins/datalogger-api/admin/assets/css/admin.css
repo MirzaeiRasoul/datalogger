@@ -1,0 +1,20 @@
+/* META BOXES
+************************************************************/
+#active_meta_box .inside {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.active-meta-box-container {
+    padding: 10px;
+}   
+
+.active-meta-box-item {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.active-meta-box-item input {
+    margin: 0 5px;
+}
