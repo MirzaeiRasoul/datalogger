@@ -14,7 +14,7 @@ while (have_posts()) {
             <h3>توضیحات تکمیلی</h3>
         </div>
         <div class="card-content">
-            <?php the_content(); ?>
+            <h3><?php echo __('Description', 'datalogger') ?></h3>
         </div>
     </div>
 </div>

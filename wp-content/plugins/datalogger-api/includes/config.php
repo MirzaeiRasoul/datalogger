@@ -1,5 +1,7 @@
 <?php
 
+/* Load text domain and translation
+****************************************************************************************************/
 function load_text_domain()
 {
     /**
@@ -11,7 +13,8 @@ function load_text_domain()
 
 add_action('plugins_loaded', 'load_text_domain');
 
-
+/* Load admin styles
+****************************************************************************************************/
 function load_admin_styles()
 {
     wp_enqueue_style('admin_style', DATALOGGER_API_URI . 'admin/assets/css/admin.css');

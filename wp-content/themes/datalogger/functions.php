@@ -1,5 +1,8 @@
 <?php
 
+
+/* Initialize theme
+****************************************************************************************************/
 function setup_theme()
 {
     /*
@@ -25,6 +28,8 @@ function setup_theme()
 
 add_action('after_setup_theme', 'setup_theme');
 
+/* Load styles
+****************************************************************************************************/
 function load_styles()
 {
     wp_enqueue_style('default_style', get_stylesheet_uri());
@@ -34,3 +39,39 @@ function load_styles()
 }
 
 add_action('wp_enqueue_scripts', 'load_styles');
+
+/* Remove some admin menu pages
+****************************************************************************************************/
+function remove_menus()
+{
+    remove_menu_page('edit.php');           //Posts
+    remove_menu_page('edit-comments.php');  //Comments
+}
+
+add_action('admin_menu', 'remove_menus');
+
+/* Costomize sort of admin menu pages
+****************************************************************************************************/
+function wpse_custom_menu_order($menu_ord)
+{
+    if (!$menu_ord) return true;
+
+    return array(
+        'edit.php?post_type=tractor',  // Tractors
+        'upload.php',                  // Media
+        'edit.php?post_type=page',     // Pages
+        'separator1',                  // First separator
+        'themes.php',                  // Appearance
+        'plugins.php',                 // Plugins
+        'options-general.php',         // Settings
+        'separator2',                  // Second separator
+        'users.php',                   // Users
+        'tools.php',                   // Tools
+        'separator3',                  // Third separator
+        'index.php',                   // Dashboard
+        'separator-last',              // Last separator
+    );
+}
+
+add_filter('custom_menu_order', 'wpse_custom_menu_order', 10, 1);
+add_filter('menu_order', 'wpse_custom_menu_order', 10, 1);

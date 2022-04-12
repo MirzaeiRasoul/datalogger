@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Data Logger\n"
-"PO-Revision-Date: 2022-03-31 07:03+0000\n"
+"PO-Revision-Date: 2022-04-09 20:04+0000\n"
 "Last-Translator: \n"
 "Language-Team: فارسی\n"
 "Language: fa_IR\n"
@@ -19,28 +19,53 @@ msgstr ""
 msgid "About"
 msgstr "درباره ما"
 
-#: template-parts/post-index.php:27 template-parts/pages/home.php:44
+#: template-parts/pages/home.php:46
 msgid "Actions"
 msgstr "گزینه‌ها"
 
-#: template-parts/post-index.php:47 template-parts/pages/home.php:66
+#: template-parts/pages/home.php:70
 msgid "Active"
 msgstr "فعال"
+
+#: template-parts/post-single.php:70
+msgid "Air"
+msgstr "هوا"
+
+#: template-parts/post-single.php:66
+msgid "Battery Charge"
+msgstr "شارژ باطری"
+
+#: template-parts/post-single.php:42
+msgid "City"
+msgstr "شهر"
+
+#: template-parts/post-single.php:46
+msgid "Coordinates"
+msgstr "مختصات"
 
 #. Name of the theme
 #: sidebar.php:6
 msgid "Data Logger"
 msgstr "دیتا لاگر"
 
-#: template-parts/post-index.php:54 template-parts/pages/home.php:69
-msgid "Details"
+#: template-parts/page-single.php:17 template-parts/post-single.php:106
+msgid "Description"
 msgstr "توضیحات"
 
-#: template-parts/post-index.php:42 template-parts/pages/home.php:60
+#: template-parts/pages/home.php:73
+#| msgid "Detail"
+msgid "Details"
+msgstr "جزئیات"
+
+#: template-parts/pages/home.php:62
 msgid "Device"
 msgstr "دستگاه"
 
-#: template-parts/post-index.php:13 template-parts/pages/home.php:30
+#: template-parts/post-single.php:60
+msgid "Differential Lock"
+msgstr "قفل دیفرانسیل"
+
+#: template-parts/pages/home.php:30
 msgid "Filters"
 msgstr "فیلترها"
 
@@ -48,28 +73,42 @@ msgstr "فیلترها"
 msgid "Home"
 msgstr "خانه"
 
-#: template-parts/post-index.php:25
+#: template-parts/pages/home.php:43
 msgid "Last Modified Date"
 msgstr ""
 "تاریخ ویرایش\n"
 
-#: template-parts/post-index.php:26 template-parts/post-single.php:27
-#: template-parts/pages/home.php:42
+#: template-parts/pages/home.php:44
 msgid "Last Modified Time"
 msgstr "ساعت ویرایش"
 
-#: template-parts/post-index.php:21 template-parts/post-single.php:24
-#: template-parts/pages/home.php:40
+#: template-parts/post-single.php:88
+msgid "Meta Active"
+msgstr "وضعیت متا"
+
+#: template-parts/post-single.php:80
+msgid "Meta Date"
+msgstr ""
+"تاریخ ایجاد متا\n"
+
+#: template-parts/post-single.php:84
+msgid "Meta Modified"
+msgstr "تاریخ ویرایش متا"
+
+#: template-parts/post-single.php:38 template-parts/pages/home.php:40
 msgid "Name"
 msgstr "نام"
 
-#: template-parts/post-index.php:23
+#: template-parts/post-single.php:56
+msgid "Oil Pressure"
+msgstr "فشار روغن"
+
+#: template-parts/pages/home.php:41
 msgid "Post Creation Date"
 msgstr ""
 "تاریخ ایجاد\n"
 
-#: template-parts/post-index.php:24 template-parts/post-single.php:26
-#: template-parts/pages/home.php:41
+#: template-parts/pages/home.php:42
 msgid "Post Creation Time"
 msgstr "ساعت ایجاد"
 
@@ -82,23 +121,30 @@ msgstr "رسول میرزائی زاده"
 msgid "Reports"
 msgstr "گزارش‌ها"
 
+#: template-parts/post-single.php:74
+msgid "Reserved"
+msgstr "رزرو شده"
+
 #: sidebar.php:28
 msgid "Setting"
 msgstr "تنظیمات"
 
-#: template-parts/post-index.php:22 template-parts/post-single.php:28
-#: template-parts/pages/home.php:43
+#: template-parts/post-single.php:22
+msgid "Specifications"
+msgstr "مشخصات"
+
+#: template-parts/pages/home.php:45
 msgid "Status"
 msgstr "وضعیت"
 
 #: template-parts/post-single.php:14
 msgid "Tractor Details"
-msgstr "مشخصات تراکتور"
+msgstr "جزئیات تراکتور"
 
 #: template-parts/post-index.php:10 template-parts/pages/home.php:11
 msgid "Tractors List"
 msgstr "لیست تراکتورها"
 
-#: template-parts/post-single.php:25
-msgid "Value"
-msgstr "مقدار"
+#: template-parts/post-single.php:52
+msgid "Water Temperature"
+msgstr "دمای آب"

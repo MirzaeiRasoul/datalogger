@@ -1,11 +1,11 @@
 <?php
 
+/* Create meta box views
+****************************************************************************************************/
 function add_post_active_meta($post)
 {
     add_meta_box('active_meta_box', __('Tractor Status', 'datalogger-api'), 'create_active_meta_box', 'tractor', 'side', 'high');
 }
-
-add_action('add_meta_boxes', 'add_post_active_meta');
 
 function create_active_meta_box($post)
 {
@@ -28,22 +28,20 @@ function create_active_meta_box($post)
 <?php
 }
 
+add_action('add_meta_boxes', 'add_post_active_meta');
+
+/* Check and update meta box data
+****************************************************************************************************/
 function save_meta_data($post_id)
 {
     // verify meta box nonce
-    if (!isset($_POST['active_meta_box_nonce']) || !wp_verify_nonce($_POST['active_meta_box_nonce'], basename(__FILE__))) {
-        return;
-    }
+    if (!isset($_POST['active_meta_box_nonce']) || !wp_verify_nonce($_POST['active_meta_box_nonce'], basename(__FILE__))) return;
 
     // return if autosave
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-        return;
-    }
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
 
     // Check the user's permissions.
-    if (!current_user_can('edit_post', $post_id)) {
-        return;
-    }
+    if (!current_user_can('edit_post', $post_id)) return;
 
     // Update meta_active status in wp_custom_meta table
     global $wpdb;

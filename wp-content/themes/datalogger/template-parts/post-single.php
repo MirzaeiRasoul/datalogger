@@ -21,16 +21,14 @@ while (have_posts()) {
         <table>
             <thead>
                 <tr>
-                    <th><?php esc_html_e('Name', 'datalogger'); ?></th>
-                    <th><?php esc_html_e('Value', 'datalogger'); ?></th>
-                    <th><?php esc_html_e('Post Creation Time', 'datalogger'); ?></th>
-                    <th><?php esc_html_e('Last Modified Time', 'datalogger'); ?></th>
-                    <th><?php esc_html_e('Status', 'datalogger'); ?></th>
+                    <th><?php echo __('Specifications', 'datalogger') ?></th>
+                    <th class="ta-center"></th>
+                    <th class="ta-center"></th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $url = 'http://localhost/datalogger/api/v1/tractors/' . get_the_ID() . '/metadata/';
+                $url = get_site_url() . '/api/v1/tractors/' . get_the_ID() . '/metadata/';
                 $args = array(
                     'method' => 'GET'
                 );
@@ -41,18 +39,66 @@ while (have_posts()) {
                     $data = $json->data;
                     if (!empty($data)) { ?>
                         <tr>
-                            <td class="f-700"><?php echo $data->post_id; ?></td>
-                            <td><?php echo $data->post_city; ?></td>
-                            <td><?php echo $data->post_geo_location; ?></td>
-                            <td><?php echo $data->meta_modified; ?></td>
-                            <td> <span class="status-active">فعال</span> </td>
+                            <td>
+                                <span class="fw-700"><?php echo __('Name', 'datalogger') ?>: </span>
+                                <span><?php echo the_title(); ?></span>
+                            </td>
+                            <td>
+                                <span class="fw-700"><?php echo __('City', 'datalogger') ?></span>: </span>
+                                <span><?php echo $data->post_city; ?></span>
+                            </td>
+                            <td>
+                                <span class="fw-700"><?php echo __('Coordinates', 'datalogger') ?></span>: </span>
+                                <span><?php echo $data->post_geo_location; ?></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="fw-700"><?php echo __('Water Temperature', 'datalogger') ?></span>: </span>
+                                <span><?php echo $data->sensor_water_temperature; ?></span>
+                            </td>
+                            <td>
+                                <span class="fw-700"><?php echo __('Oil Pressure', 'datalogger') ?></span>: </span>
+                                <span><?php echo $data->sensor_oil_pressure; ?></span>
+                            </td>
+                            <td>
+                                <span class="fw-700"><?php echo __('Differential Lock', 'datalogger') ?></span>: </span>
+                                <span><?php echo $data->sensor_differential_lock; ?></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="fw-700"><?php echo __('Battery Charge', 'datalogger') ?></span>: </span>
+                                <span><?php echo $data->sensor_battery_charge; ?></span>
+                            </td>
+                            <td>
+                                <span class="fw-700"><?php echo __('Air', 'datalogger') ?></span>: </span>
+                                <span><?php echo $data->sensor_air; ?></span>
+                            </td>
+                            <td>
+                                <span class="fw-700"><?php echo __('Reserved', 'datalogger') ?></span>: </span>
+                                <span><?php echo $data->sensor_reserved; ?></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="fw-700"><?php echo __('Meta Date', 'datalogger') ?></span>: </span>
+                                <span><?php echo $data->meta_date; ?></span>
+                            </td>
+                            <td>
+                                <span class="fw-700"><?php echo __('Meta Modified', 'datalogger') ?></span>: </span>
+                                <span><?php echo $data->meta_modified; ?></span>
+                            </td>
+                            <td>
+                                <span class="fw-700"><?php echo __('Meta Active', 'datalogger') ?></span>: </span>
+                                <span><?php echo $data->meta_active; ?></span>
+                            </td>
+                            <!-- <td><span class="status-active">فعال</span></td> -->
                         </tr>
                     <?php
                     } else { ?>
                         <tr>
-                            <td class="f-700"><?php echo $json->error->message; ?></td>
-                            <td></td>
-                            <td></td>
+                            <td><?php echo $json->error->message; ?></td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -67,7 +113,7 @@ while (have_posts()) {
     </div>
     <div class="card mg-t-15">
         <div class="card-title">
-            <h3>توضیحات تکمیلی</h3>
+            <h3><?php echo __('Description', 'datalogger') ?></h3>
         </div>
         <div class="card-content">
             <?php the_content(); ?>

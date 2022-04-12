@@ -58,7 +58,7 @@ $page_number = get_query_var('page') ? get_query_var('page') : 1;
                     $tractor_posts->the_post(); ?>
                     <tr>
                         <td class="f-700">
-                            <a href="<?php the_permalink(); ?>">
+                            <a class="link" href="<?php the_permalink(); ?>">
                                 <?php esc_html_e('Device', 'datalogger'); ?> <?php the_title(); ?>
                             </a>
                         </td>
