@@ -20,11 +20,11 @@
 
 
 ## List of http status codes
-- 200 -> success
-- 201 -> created
-- 400 -> 
-- 404 -> 
-- 500 -> 
+- 200 -> Success
+- 201 -> Created
+- 400 -> Bad Request
+- 404 -> Not Found
+- 500 -> Internal server error
 
 https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/
 400 Bad Request – This means that client-side input fails validation.
