@@ -12,11 +12,11 @@ function create_active_meta_box($post)
     // make sure the form request comes from WordPress
     wp_nonce_field(basename(__FILE__), 'active_meta_box_nonce');
 
-    // Read meta_active status from wp_custom_meta table
+    // Read tractor_active_status status from wp_tractor_meta table
     global $wpdb;
-    $table_name = $wpdb->prefix . 'custom_meta'; // wp_custom_meta
+    $table_name = $wpdb->prefix . 'tractor_meta'; // wp_tractor_meta
 
-    $query = "SELECT meta_active FROM $table_name WHERE post_id = $post->ID";
+    $query = "SELECT tractor_active_status FROM $table_name WHERE tractor_id = $post->ID";
     $active_meta = $wpdb->get_var($query);
 ?>
     <div class="active-meta-box-container">
@@ -43,14 +43,14 @@ function save_meta_data($post_id)
     // Check the user's permissions.
     if (!current_user_can('edit_post', $post_id)) return;
 
-    // Update meta_active status in wp_custom_meta table
+    // Update tractor_active_status status in wp_tractor_meta table
     global $wpdb;
-    $table_name = $wpdb->prefix . 'custom_meta'; // wp_custom_meta
+    $table_name = $wpdb->prefix . 'tractor_meta'; // wp_tractor_meta
 
     $new_active_meta_box = $_POST['active-meta'];
-    isset($new_active_meta_box) ? $new_meta_active = 1 : $new_meta_active = 0;
+    isset($new_active_meta_box) ? $new_tractor_active_status = 1 : $new_tractor_active_status = 0;
 
-    $query = "UPDATE $table_name SET meta_active = $new_meta_active WHERE post_id = $post_id";
+    $query = "UPDATE $table_name SET tractor_active_status = $new_tractor_active_status WHERE tractor_id = $post_id";
     $wpdb->query($query);
 }
 

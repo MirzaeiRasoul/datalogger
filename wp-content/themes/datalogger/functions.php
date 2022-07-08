@@ -1,6 +1,5 @@
 <?php
 
-
 /* Initialize theme
 ****************************************************************************************************/
 function setup_theme()
@@ -24,6 +23,12 @@ function setup_theme()
 	 * Translations can be filed in the /languages/ directory.
 	 */
     load_theme_textdomain('datalogger', get_template_directory() . '/languages');
+
+    add_filter('wp_mail_content_type', 'set_content_type');
+    function set_content_type($content_type)
+    {
+        return 'text/html';
+    }
 }
 
 add_action('after_setup_theme', 'setup_theme');
@@ -57,6 +62,7 @@ function wpse_custom_menu_order($menu_ord)
     if (!$menu_ord) return true;
 
     return array(
+        'index.php',                   // Dashboard
         'edit.php?post_type=tractor',  // Tractors
         'upload.php',                  // Media
         'edit.php?post_type=page',     // Pages
@@ -68,7 +74,6 @@ function wpse_custom_menu_order($menu_ord)
         'users.php',                   // Users
         'tools.php',                   // Tools
         'separator3',                  // Third separator
-        'index.php',                   // Dashboard
         'separator-last',              // Last separator
     );
 }

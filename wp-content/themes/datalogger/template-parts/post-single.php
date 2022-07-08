@@ -35,8 +35,7 @@ while (have_posts()) {
                 $request = wp_remote_get($url, $args);
                 if (!is_wp_error($request) && is_array($request)) {
                     $response = wp_remote_retrieve_body($request);
-                    $json = json_decode($response);
-                    $data = $json->data;
+                    $data = json_decode($response);
                     if (!empty($data)) { ?>
                         <tr>
                             <td>
@@ -45,53 +44,53 @@ while (have_posts()) {
                             </td>
                             <td>
                                 <span class="fw-700"><?php echo __('City', 'datalogger') ?></span>: </span>
-                                <span><?php echo $data->post_city; ?></span>
+                                <span><?php echo $data->t_city; ?></span>
                             </td>
                             <td>
                                 <span class="fw-700"><?php echo __('Coordinates', 'datalogger') ?></span>: </span>
-                                <span><?php echo $data->post_geo_location; ?></span>
+                                <span><?php echo "$data->gprs_long ,$data->gprs_lat"; ?></span>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <span class="fw-700"><?php echo __('Water Temperature', 'datalogger') ?></span>: </span>
-                                <span><?php echo $data->sensor_water_temperature; ?></span>
+                                <span><?php echo $data->s_d1; ?></span>
                             </td>
                             <td>
                                 <span class="fw-700"><?php echo __('Oil Pressure', 'datalogger') ?></span>: </span>
-                                <span><?php echo $data->sensor_oil_pressure; ?></span>
+                                <span><?php echo $data->s_d2; ?></span>
                             </td>
                             <td>
                                 <span class="fw-700"><?php echo __('Differential Lock', 'datalogger') ?></span>: </span>
-                                <span><?php echo $data->sensor_differential_lock; ?></span>
+                                <span><?php echo $data->s_d3; ?></span>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <span class="fw-700"><?php echo __('Battery Charge', 'datalogger') ?></span>: </span>
-                                <span><?php echo $data->sensor_battery_charge; ?></span>
+                                <span><?php echo $data->s_d4; ?></span>
                             </td>
                             <td>
                                 <span class="fw-700"><?php echo __('Air', 'datalogger') ?></span>: </span>
-                                <span><?php echo $data->sensor_air; ?></span>
+                                <span><?php echo $data->s_d5; ?></span>
                             </td>
                             <td>
                                 <span class="fw-700"><?php echo __('Reserved', 'datalogger') ?></span>: </span>
-                                <span><?php echo $data->sensor_reserved; ?></span>
+                                <span><?php echo $data->s_d6; ?></span>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <span class="fw-700"><?php echo __('Meta Date', 'datalogger') ?></span>: </span>
-                                <span><?php echo $data->meta_date; ?></span>
+                                <span><?php echo $data->m_dt; ?></span>
                             </td>
                             <td>
                                 <span class="fw-700"><?php echo __('Meta Modified', 'datalogger') ?></span>: </span>
-                                <span><?php echo $data->meta_modified; ?></span>
+                                <span><?php echo $data->m_mdf; ?></span>
                             </td>
                             <td>
                                 <span class="fw-700"><?php echo __('Meta Active', 'datalogger') ?></span>: </span>
-                                <span><?php echo $data->meta_active; ?></span>
+                                <span><?php echo $data->act_stat; ?></span>
                             </td>
                             <!-- <td><span class="status-active">فعال</span></td> -->
                         </tr>
